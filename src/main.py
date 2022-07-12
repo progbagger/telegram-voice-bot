@@ -50,7 +50,8 @@ def handle_voice(msg: Message):
 
 @bot.message_handler()
 def handle_all(msg: Message):
-    bot.send_message(msg.chat.id, "Мне нужны *голосовые сообщения!*")
+    if msg.chat.type == "private":
+        bot.send_message(msg.chat.id, "Мне нужны *голосовые сообщения!*")
 
 
 def main():

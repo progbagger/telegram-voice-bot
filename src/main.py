@@ -3,7 +3,6 @@ from telebot.types import Message
 from config import *
 import speech_recognition as sr
 from os import remove
-import soundfile as sf
 from pydub import AudioSegment
 
 bot = telebot.TeleBot(token=TOKEN, parse_mode="Markdown")
@@ -38,8 +37,6 @@ def handle_voice(msg: Message):
     with open(pre_audio, "wb") as written_file:
         written_file.write(downloaded)
     AudioSegment.from_ogg(pre_audio).export(post_audio, format="wav")
-    # data, samplerate = sf.read(pre_audio, always_2d=True)
-    # sf.write(post_audio, data, samplerate)
     file = sr.AudioFile(post_audio)
     with file as voice:
         r.adjust_for_ambient_noise(voice)
